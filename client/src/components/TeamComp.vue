@@ -39,17 +39,20 @@
 </template>
 
 <script>
+import imagen_1 from '../assets/LuisHO.jpg'
+import imagen_2 from '../assets/HeynarS.jpg'
+import imagen_3 from '../assets/EstefaniaM.jpg'
 import imagen_5 from '../assets/JorgeL.jpg';
 
 export default {
     name:'Team',
     data: () => ({
         cards: [
-            { title: 'Scrum Master', name: 'Luis Humberto Osorio', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 6 },
-            { title: 'Product Owner', name: 'Heynar Soto Holguin', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 6 },
-            { title: 'Developer', name: 'Estefania Muñoz', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 6 },
+            { title: 'Scrum Master', name: 'Luis Humberto Osorio', description: 'Systems Engineer \nInformation systems programmer focused on the development web applications.', email: 'lhosorio@gmail.com', src: imagen_1, flex: 6 },
+            { title: 'Product Owner', name: 'Heynar Soto Holguin', description: '3D Designer', email: 'heynar76@hotmail.com', src: imagen_2, flex: 6 },
+            { title: 'Developer', name: 'Estefania Muñoz', description: 'Industrial Engineer', email: 'Estefamg@outlook.es', src: imagen_3, flex: 6 },
             { title: 'Developer', name: 'Cindy Diaz', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 6 },
-            { title: 'Developer', name: 'Jorge Luis Velasquez', description: 'Tecnologo en Electronica apasionado por la tecnologia y el desarrolo de software', email: 'jorgeluisvelasquezv@gmail.com', src: imagen_5, flex: 6  },
+            { title: 'Developer', name: 'Jorge Luis Velasquez', description: 'Electronic Technologist. Passionate about technology and software development', email: 'jorgeluisvelasquezv@gmail.com', src: imagen_5, flex: 6  },
         ],
     }),
 

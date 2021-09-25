@@ -32,12 +32,12 @@ export default {
             link: '/main',
         },
         {
-            icon: 'mdi-account',
+            icon: 'mdi-autorenew',
             text: 'MOVEMENTS',
             link: '/movements',
         },
         {
-            icon: 'mdi-account-plus',
+            icon: 'mdi-sigma',
             text: 'TOTALS',
             link: '/totals',
         },
@@ -47,12 +47,12 @@ export default {
             link: '/data',
         },
         {
-            icon: 'mdi-lightbulb-group',
+            icon: 'mdi-cog',
             text: 'TEAM',
             link: '/team',
         },
         {
-            icon: 'mdi-lightbulb-group',
+            icon: 'mdi-logout-variant',
             text: 'LOGOUT',
             link: '/',
         },
