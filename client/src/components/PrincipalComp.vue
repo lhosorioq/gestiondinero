@@ -1,0 +1,30 @@
+<template>
+    <v-container>
+        <v-row>
+            <v-col cols="6" class="pa-5">
+                <h1 class="font-weight-black font-entangled-bold display-3 pa-5 ">Bienvenido {{user.name}}</h1>
+                <v-spacer></v-spacer>
+                <h1 class="font-weight-black font-entangled-bold display-3 pa-5">Gestion Dinero</h1>
+                <h1 class="font-weight-black font-entangled-bold font-italic display-1 pa-5">¡Para tener dinero en tus manos, empieza ahora mismo con el control!</h1>
+            </v-col>
+            <v-col cols="6">
+                <v-img class="align-end" :src=logo></v-img>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
+
+<script>
+import logo from '../assets/logo_nombre.png'
+import {mapState} from 'vuex'
+
+export default {
+    name: 'PrincipalComp',
+    data: () => ({
+        logo,
+    }),
+    computed:{
+        ...mapState(['user']),
+    }
+}
+</script>
