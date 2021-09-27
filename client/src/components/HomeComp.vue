@@ -1,21 +1,19 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="6">
-                <v-img :src=imagenppal></v-img>
-            </v-col>
-            <v-col cols="6">
-                <v-card class="d-flex justify-center" width="100%">
+    <section>
+        
+        <div class="imageninicio">
             
-                    <v-form class="justify-center mb-6" ref="form" v-model="valid">
-                        
-                        <v-container class="d-flex justify-center">
-                            <v-img class="align-end" :src=logo></v-img>
-                        </v-container>
+            <img src="../assets/presentacion_pagina.png">
 
-                        <v-container class="d-flex justify-center">
-                            <h1>Login</h1>
-                        </v-container>
+        </div>
+        <div class="contenidologin">
+            <div class="logo">
+                <img src="../assets/logo_nombre.png">
+            </div>
+
+            <div class="formalogin">
+                <v-form class="justify-center mb-12" ref="form" v-model="valid">
+                    <h2>Login</h2>
                         
                         <v-text-field v-model="user.email" :rules="emailRules" label="E-mail" required></v-text-field>
                         <v-text-field  v-model="user.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
@@ -25,22 +23,19 @@
                         <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Login</v-btn>
 
                         
-                    </v-form>
-                </v-card>
-            </v-col>
-        </v-row>
-    </v-container>
+                </v-form>
+            </div>    
+        </div>    
+    </section>    
 </template>
 
 <script>
-import imagenppal from '../assets/presentacion_pagina.png'
-import logo from '../assets/logo_nombre.png'
+
 
 export default {
-    name: 'homeComp',
+    name: 'HomeComp',
     data: () => ({
-        imagenppal,
-        logo,
+        
         valid: true,
             show4: false,
             passwordRules: [
