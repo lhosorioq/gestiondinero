@@ -4,19 +4,19 @@
             <v-container>
                 <v-row>
                     <v-col :cols='12'>
-                        <v-card align-center>
+                        <v-card align-center color="#EDFFCA">
                             <v-card-text>
                                 <h1 class="text-md-center">TEAM</h1>
                             </v-card-text>
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
-                    <v-card>
+                    <v-col  v-for="card in cards" :key="card.title" :cols="card.flex" md=6>
+                    <v-card color="#EDFFCA">
                         <v-row justify="center">
                         <v-col cols="4">
                         <v-img :src="card.src" class="white--text align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px">
-                            <v-card-title v-text="card.title" class="text-xs-center"></v-card-title>
+                            <v-card-title v-text="card.title" class="text-xs-center titulo" ></v-card-title>
                         </v-img>
                         </v-col>
                         </v-row>
@@ -48,13 +48,19 @@ export default {
     name:'Team',
     data: () => ({
         cards: [
-            { title: 'Scrum Master', name: 'Luis Humberto Osorio', description: 'Systems Engineer \nInformation systems programmer focused on the development web applications.', email: 'lhosorio@gmail.com', src: imagen_1, flex: 6 },
-            { title: 'Product Owner', name: 'Heynar Soto Holguin', description: '3D Designer', email: 'heynar76@hotmail.com', src: imagen_2, flex: 6 },
-            { title: 'Developer', name: 'Estefania Muñoz', description: 'Industrial Engineer', email: 'Estefamg@outlook.es', src: imagen_3, flex: 6 },
-            { title: 'Developer', name: 'Cindy Diaz', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 6 },
+            { title: 'Scrum Master', name: 'Luis Humberto Osorio', description: 'Systems Engineer \nInformation systems programmer focused on the development web applications.', email: 'lhosorio@gmail.com', src: imagen_1, flex: 12 },
+            { title: 'Product Owner', name: 'Heynar Soto Holguin', description: '3D Designer', email: 'heynar76@hotmail.com', src: imagen_2, flex: 12 },
+            { title: 'Developer', name: 'Estefania Muñoz', description: 'Industrial Engineer', email: 'Estefamg@outlook.es', src: imagen_3, flex: 12 },
+            { title: 'Developer', name: 'Cindy Diaz', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 12 },
             { title: 'Developer', name: 'Jorge Luis Velasquez', description: 'Electronic Technologist. Passionate about technology and software development', email: 'jorgeluisvelasquezv@gmail.com', src: imagen_5, flex: 6  },
         ],
     }),
 
 }
 </script>
+
+<style scoped>
+    .titulo {
+        font-size: 1.2rem
+    }
+</style>
