@@ -28,16 +28,6 @@
 import axios from "axios";
 import {mapState} from 'vuex'
 
-    // class Users { 
-    //     constructor (name, email, password, section, egree) {
-    //         this.name= name;
-    //         this.email= email;
-    //         this.password= password;
-    //         this.section= section;
-    //         this.agree= egree;
-    //     }
-    // }
-
     export default {
         name:'signup',
         props:['value'],
@@ -52,7 +42,6 @@ import {mapState} from 'vuex'
             v => !!v || 'Name is required',
             v => (v && v.length <= 10) || 'Name must be less than 10 characters',
         ],
-        //user: new Users(),
         emailRules: [
             v => !!v || 'E-mail is required',
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -74,17 +63,14 @@ import {mapState} from 'vuex'
         methods: {
             validate () {
                 if (this.$refs.form.validate()){
-                    // alert("Registro Exitoso");
-                    alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
-                    // this.guardar();
+                    alert("Registro Exitoso");
+                    this.guardar();
                     this.$emit('input') // Cierra el modal al terminar registro satisfactorio
                 }  
             },
             guardar(){
                 axios
-                    .post("http://localhost:3000/registros/save", {
-                    login: this.user
-                    })
+                    .post("http://localhost:3000/registros/user-new", this.user)
                     .then(response => {
                     this.message = response.data;
                     this.reset();
@@ -100,4 +86,3 @@ import {mapState} from 'vuex'
         },
     }
 </script>
-

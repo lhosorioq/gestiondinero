@@ -15,10 +15,8 @@
                 <v-form class="justify-center mb-12" ref="form" v-model="valid">
                     <h2>Login</h2>
                         
-                        <v-text-field v-model="user.email" :rules="emailRules" label="E-mail" required></v-text-field>
-                        <v-text-field  v-model="user.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
-
-                        <v-checkbox v-model="user.checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
+                        <v-text-field v-model="usuario.email" :rules="emailRules" label="E-mail" required></v-text-field>
+                        <v-text-field  v-model="usuario.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
 
                         <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Login</v-btn>
 
@@ -33,6 +31,7 @@
 
 <script>
 import SignupCom from './SignupCom.vue';
+import axios from "axios";
 import {mapState} from 'vuex'
 
 export default {
@@ -50,10 +49,9 @@ export default {
             v => !!v || 'Password is required',
             v => v.length >= 8 || 'Min 8 characters',
         ],
-        user: {
+        usuario: {
             email: '', 
             password: '',
-            checkbox: false,
         },
         emailRules: [
             v => !!v || 'E-mail is required',
@@ -62,19 +60,44 @@ export default {
 
     }),
     computed:{
-        ...mapState(['dialog']),
+        ...mapState(['user','dialog']),
         },
 
     methods: {
         validate () {
         if (this.$refs.form.validate()){
-            alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
-                this.reset();
-                window.location.href = '/main';
+            let respuesta =  this.login(this.usuario.email);
+            console.log(respuesta);
+            // console.log(this.usuario.email);
+            if (respuesta.email == this.usuario.email) {
+                alert("SUCCESS!! :-)\n\n" + JSON.stringify(respuesta));
+            }
+            // alert("SUCCESS!! :-)\n\n" + JSON.stringify(respuesta));
+            // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+            this.reset();
+            // window.location.href = '/main';
         }
         },
         reset () {
             this.$refs.form.reset()
+        },
+        // async login (correo){
+            async login (email) {
+                try {
+                    const response = await axios({
+                        method: 'get',
+                        params: { email: email },
+                        url: `http://localhost:3000/registros/login`,
+                        responseType: 'json'
+                    });
+                    // console.log(response);
+                    return response.data;
+                } catch (error) {
+                    console.log(error);
+                }
+            // };
+            // obtener_cliente_id(correo);
+
         },
     },
 
