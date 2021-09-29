@@ -22,7 +22,9 @@
 
                         <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Login</v-btn>
 
-                        
+                        <v-btn color="primary" dark @click="modal=true">Sign Up</v-btn>
+                        <signup-com v-model="modal"/>
+                                                
                 </v-form>
             </div>    
         </div>    
@@ -30,29 +32,38 @@
 </template>
 
 <script>
-
+import SignupCom from './SignupCom.vue';
+import {mapState} from 'vuex'
 
 export default {
+    components: { SignupCom },
     name: 'HomeComp',
+    props: {
+        modal: Boolean, 
+    },
     data: () => ({
-        
+        // dialog: false,
+        // modal: false,
         valid: true,
-            show4: false,
-            passwordRules: [
-                v => !!v || 'Password is required',
-                v => v.length >= 8 || 'Min 8 characters',
-            ],
-            user: {
-                email: '', 
-                password: '',
-                checkbox: false,
-            },
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-            ],
+        show4: false,
+        passwordRules: [
+            v => !!v || 'Password is required',
+            v => v.length >= 8 || 'Min 8 characters',
+        ],
+        user: {
+            email: '', 
+            password: '',
+            checkbox: false,
+        },
+        emailRules: [
+            v => !!v || 'E-mail is required',
+            v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+        ],
 
     }),
+    computed:{
+        ...mapState(['dialog']),
+        },
 
     methods: {
         validate () {
