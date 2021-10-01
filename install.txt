@@ -6,7 +6,10 @@ npm run devbabel
 
 Seguido..
 Entre en la carpeta "client" y ejecute:
-npm install
+npm install 
 
 Luego en la misma carpeta ejecute:
 npm run serve
+
+En caso de error de createPersistedState se debe instalar 
+npm install --save vuex-persistedstate

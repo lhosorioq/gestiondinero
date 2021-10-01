@@ -32,7 +32,7 @@
 <script>
 import SignupCom from './SignupCom.vue';
 import axios from "axios";
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
     components: { SignupCom },
@@ -41,8 +41,6 @@ export default {
         modal: Boolean, 
     },
     data: () => ({
-        // dialog: false,
-        // modal: false,
         valid: true,
         show4: false,
         passwordRules: [
@@ -64,41 +62,52 @@ export default {
         },
 
     methods: {
-        validate () {
+        async validate () {
         if (this.$refs.form.validate()){
-            let respuesta =  this.login(this.usuario.email);
-            console.log(respuesta);
-            // console.log(this.usuario.email);
-            if (respuesta.email == this.usuario.email) {
-                alert("SUCCESS!! :-)\n\n" + JSON.stringify(respuesta));
+            let respuesta = await this.login(this.usuario.email, this.usuario.password);
+            
+            if (respuesta!='') {
+                this.loadUser(await this.dataUser(respuesta));
+                alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
+                this.reset();
+                window.location.href = '/main'
+            }else{
+                alert("ERROR: usuario o contraseña incorrectos");
             }
-            // alert("SUCCESS!! :-)\n\n" + JSON.stringify(respuesta));
-            // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
             this.reset();
-            // window.location.href = '/main';
+            
         }
         },
         reset () {
             this.$refs.form.reset()
         },
-        // async login (correo){
-            async login (email) {
+            async login (email, password) {
                 try {
                     const response = await axios({
                         method: 'get',
-                        params: { email: email },
+                        params: { email: email, password: password},
                         url: `http://localhost:3000/registros/login`,
                         responseType: 'json'
                     });
-                    // console.log(response);
                     return response.data;
                 } catch (error) {
                     console.log(error);
                 }
-            // };
-            // obtener_cliente_id(correo);
+        },
+            async dataUser (id) {
+                try {
+                    const response = await axios({
+                        method: 'get',
+                        url: `http://localhost:3000/registros/registro/${id}`,
+                        responseType: 'json'
+                    });
+                    return response.data;
+                } catch (error) {
+                    console.log(error);
+                }
 
         },
+        ...mapMutations(["loadUser"])
     },
 
 }
