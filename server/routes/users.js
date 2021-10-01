@@ -46,24 +46,22 @@ router.get('/registro/:id', async (req, res) =>{
 // Consulta base de datos por email y password 
 router.get('/login', async (req, res) =>{
     let correo = req.query.email;
+    let contrasena = req.query.password;
 
     try {
         
-        const registro = await user.find({email: correo});
-        if (registro[0].email === correo) {
-            res.json(true);
+        const registro = await user.find({email: correo, password: contrasena});
+        if (registro[0].email === correo && registro[0].password === contrasena) {
+            res.json((registro[0]._id).toString());
             
         }else{ 
-            console.log(registro[0].email);
+            res.json('');
         }
         
 
     } catch (err) {
         
-        return res.status(400).json({
-            mensaje: "Ocurrio un error",
-            err
-        });
+        return res.json(false);
         
     }
 });
