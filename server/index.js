@@ -4,7 +4,8 @@ import cors from 'cors';
 import path from 'path';
 
 const mongoose = require('mongoose'); 
-const history = require('connect-history-api-fallback');  
+// Sirve para lidiar con modo history de Vue 
+const history = require('connect-history-api-fallback'); 
 
 const app = express(); 
 
@@ -30,8 +31,9 @@ app.use(cors());
 app.use(express.json()); 
 //application/x-www-form-urlencoded 
 app.use(express.urlencoded({ extended: true }))
-// Sirve para lidiar con modo history de Vue 
-// app.use(history()); // Con esto no me permite hacer los get pendiente buscar solucion 
+
+
+app.use(history()); 
 // Carpeta donde se enviaran todos los datos a HTML VUE
 app.use(express.static(path.join(__dirname, 'public')));
 

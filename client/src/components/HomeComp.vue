@@ -68,7 +68,6 @@ export default {
             
             if (respuesta!='') {
                 this.loadUser(await this.dataUser(respuesta));
-                alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
                 this.reset();
                 window.location.href = '/main'
             }else{

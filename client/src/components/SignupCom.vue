@@ -6,11 +6,11 @@
                     <v-container class="d-flex justify-center mb-6">
                         <h1>Sign Up</h1>
                     </v-container>
-                    <v-text-field class="ml-4 mr-4" v-model="user.name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
-                    <v-text-field class="ml-4 mr-4" v-model="user.email" :rules="emailRules" label="E-mail" required></v-text-field>
-                    <v-text-field class="ml-4 mr-4" v-model="user.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
+                    <v-text-field class="ml-4 mr-4" v-model="usuario.name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+                    <v-text-field class="ml-4 mr-4" v-model="usuario.email" :rules="emailRules" label="E-mail" required></v-text-field>
+                    <v-text-field class="ml-4 mr-4" v-model="usuario.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
                     
-                    <v-checkbox class="ml-4 mr-4" v-model="user.egree" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
+                    <v-checkbox class="ml-4 mr-4" v-model="usuario.egree" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
                     
                     <v-btn :disabled="!valid" color="success" class="ma-4" @click="validate">Validate</v-btn>
                     <v-btn color="warning" class="ma-4" @click="reset">Reset Form</v-btn>
@@ -22,11 +22,8 @@
 </template>
 
 
-// pendiente: Enlazar con BD y verificar funcionamiento de la clase user en Vuex 
-
 <script>
 import axios from "axios";
-import {mapState} from 'vuex'
 
     export default {
         name:'signup',
@@ -34,6 +31,12 @@ import {mapState} from 'vuex'
         data: () => ({
         valid: true,
         show4: false,
+        usuario: {
+            name:'',
+            pasword: '',
+            email: '',
+            egree: '',
+        },
         passwordRules: [
             v => !!v || 'Password is required',
             v => v.length >= 8 || 'Min 8 characters',
@@ -49,7 +52,6 @@ import {mapState} from 'vuex'
         }),
 
         computed:{
-        ...mapState(['user', 'dialog']),
             show: {
                 get () {
                     return this.value
@@ -70,7 +72,7 @@ import {mapState} from 'vuex'
             },
             guardar(){
                 axios
-                    .post("http://localhost:3000/registros/user-new", this.user)
+                    .post("http://localhost:3000/registros/user-new", this.usuario)
                     .then(response => {
                     this.message = response.data;
                     this.reset();

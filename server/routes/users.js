@@ -84,6 +84,54 @@ router.get('/registro', async (req, res) => {
     }
 });
 
+// Cargar movimientos de usuario 
+router.put('/update-move/:id', async (req, res) => {
+        
+    const _id = req.params.id;
+    const body = req.body;
+
+    try {
+        
+        const userDB = await user.findByIdAndUpdate(
+            _id,
+            { $push: { 'movimientos': body } },
+            {new: true});
+        res.json(userDB);
+
+    } catch (err) {
+        
+        return res.status(400).json({
+            mensaje: "Ocurrio un error",
+            err
+        });
+
+    }
+});
+
+// Eliminar movimientos de usuario 
+router.put('/delete-move/:id', async (req, res) => {
+        
+    const _id = req.params.id;
+    const body = req.body;
+
+    try {
+        
+        const userDB = await user.findByIdAndUpdate(
+            _id,
+            { $pull: { 'movimientos': {'category': body.category, 'concept':body.concept, 'value':body.value, 'observation': body.observation}} },
+            {new: true});
+        res.json(userDB);
+
+    } catch (err) {
+        
+        return res.status(400).json({
+            mensaje: "Ocurrio un error",
+            err
+        });
+
+    }
+});
+
 // Eliminar usuario 
 router.delete('/registro/:id', async (req, res) =>{ 
 
