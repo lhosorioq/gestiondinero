@@ -43,7 +43,7 @@
             <v-col lg=8 >
                 <v-card elevation="4">
                     <v-container pa=4>
-                        <v-data-table :headers="headers" :items="this.user.movimientos" sort-by="calories" >
+                        <v-data-table :headers="headers" :items="this.user.movimientos" sort-by="Categoria" >
                             <template v-slot:top>
                                 <v-toolbar  class="mb-2" color="green darken-5" dark flat>
                                     <v-toolbar-title>Movimientos Realizados</v-toolbar-title>
@@ -113,15 +113,18 @@ import {mapState, mapMutations} from 'vuex'
 
     export default {
         data: () => ({
-        dialog: false,
-        dialogDelete: false,
+            dialog: false,
+            dialogDelete: false,
 
-        movement: {
-                category:'',
-                concept:'',
-                value: '',
-                observation: '',
+            movement: {
+                    category:'',
+                    concept:'',
+                    value: '',
+                    observation: '',
             },
+
+            datos:{index:0, item:{} },
+
             category: [
                 'Transferencia',
                 'PSE',
@@ -147,7 +150,7 @@ import {mapState, mapMutations} from 'vuex'
             {
                     text: 'Categoria',
                     align: 'start',
-                    sortable: false,
+                    sortable: true,
                     value: 'category',
             },
             { text: 'Concepto', value: 'concept' },
@@ -197,6 +200,7 @@ import {mapState, mapMutations} from 'vuex'
             },
             
             guardar(){
+                    
 
                 try {
                     
@@ -248,6 +252,24 @@ import {mapState, mapMutations} from 'vuex'
                 
             },
 
+            updateMovement (datos) {
+                
+                try {
+                    axios
+                        .put(`http://localhost:3000/registros/edit-move/${this.user.id}`, datos)
+                        .then(response => {
+                        this.message = response.data;
+                        this.reset();
+                        });
+
+                } catch (error) {
+
+                    console.log(error);
+
+                }
+                
+            },
+
             reset () {
 
                 this.$refs.form.reset()
@@ -258,7 +280,17 @@ import {mapState, mapMutations} from 'vuex'
 
                 this.editedIndex = this.user.movimientos.indexOf(item)
                 this.editedItem = Object.assign({}, item)
+                this.datos.index = this.editedIndex;
+                this.datos.item = this.editedItem;
                 this.dialog = true
+
+            },
+
+            async save () {
+
+                this.updateMovement(this.datos);
+                this.loadUser(await this.dataUser(this.user.id));
+                this.close();
 
             },
 
