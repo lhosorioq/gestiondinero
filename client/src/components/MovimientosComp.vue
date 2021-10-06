@@ -157,7 +157,6 @@ import {mapState, mapMutations} from 'vuex'
             { text: 'Valor', value: 'value' },
             { text: 'Observacion', value: 'observation' },
             { text: 'Actions', value: 'actions', sortable: false },
-            { text: 'ID', value: 'id', sortable: false },
         ],
         editedItem: {
             category: '',
