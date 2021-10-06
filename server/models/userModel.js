@@ -5,6 +5,7 @@ let UserSchema = new Schema({
     name: String,
     email: String,
     password: String,
+    movimientos: Array
 });
 
 // Convertir a modelo y exportar modelo

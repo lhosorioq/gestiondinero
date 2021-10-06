@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 class User { 
   constructor (name, email, password, egree) {
+      this.id = '';
       this.name= name;
       this.email= email;
       this.password= password;
@@ -20,12 +21,14 @@ class User {
   }
 }
 
+
 export default new Vuex.Store({
   state: {
-    user: new User('Julanito de tal'), //Se esta usando como ejemplo este nombre se debe quitar al montar BD,
+    user: new User(), //Se esta usando como ejemplo este nombre se debe quitar al montar BD,
   },
   mutations: {
     loadUser(state, data){
+      state.user.id = data._id;
       state.user.name = data.name;
       state.user.email = data.email;
       state.user.password = data.password;
