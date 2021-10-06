@@ -51,8 +51,7 @@ export default {
             { title: 'Scrum Master', name: 'Luis Humberto Osorio', description: 'Systems Engineer \nInformation systems programmer focused on the development web applications.', email: 'lhosorio@gmail.com', src: imagen_1, flex: 12 },
             { title: 'Product Owner', name: 'Heynar Soto Holguin', description: '3D Designer', email: 'heynar76@hotmail.com', src: imagen_2, flex: 12 },
             { title: 'Developer', name: 'Estefania Muñoz', description: 'Industrial Engineer', email: 'Estefamg@outlook.es', src: imagen_3, flex: 12 },
-            { title: 'Developer', name: 'Cindy Diaz', description: 'Lorem ipsum dolor sit amet, consectetur', email: 'mail@mail.com', src: '', flex: 12 },
-            { title: 'Developer', name: 'Jorge Luis Velasquez', description: 'Electronic Technologist. Passionate about technology and software development', email: 'jorgeluisvelasquezv@gmail.com', src: imagen_5, flex: 6  },
+            { title: 'Developer', name: 'Jorge Luis Velasquez', description: 'Electronic Technologist. Passionate about technology and software development', email: 'jorgeluisvelasquezv@gmail.com', src: imagen_5, flex: 12  },
         ],
     }),
 

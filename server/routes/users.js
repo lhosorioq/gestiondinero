@@ -132,6 +132,31 @@ router.put('/delete-move/:id', async (req, res) => {
     }
 });
 
+// Actualizar movimientos de usuario 
+router.put('/edit-move/:id', async (req, res) => {
+        
+    const _id = req.params.id;
+    const body = req.body;
+    const envio = `movimientos.${body.index}`;
+
+    try {
+        
+        const userDB = await user.findByIdAndUpdate(
+            _id,
+            { $set: { [envio] : body.item} },
+            {new: true});
+        res.json(userDB);
+
+    } catch (err) {
+        
+        return res.status(400).json({
+            mensaje: "Ocurrio un error",
+            err
+        });
+
+    }
+});
+
 // Eliminar usuario 
 router.delete('/registro/:id', async (req, res) =>{ 
 
