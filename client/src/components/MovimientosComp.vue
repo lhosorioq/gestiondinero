@@ -11,6 +11,9 @@
             </v-col>
         </v-row>
 
+        <!-- Alerta -->
+        <v-alert :value="alerta" color="green" dark border="top" icon="mdi-check" transition="scale-transition">{{mensaje}}</v-alert>
+
         <!-- Registro de Movimientos -->
         <v-row>
             <v-col lg=4>
@@ -115,6 +118,8 @@ import {mapState, mapMutations} from 'vuex'
         data: () => ({
             dialog: false,
             dialogDelete: false,
+            alerta: false,
+            mensaje: '',
 
             movement: {
                     category:'',
@@ -194,6 +199,7 @@ import {mapState, mapMutations} from 'vuex'
                 if (this.$refs.form.validate()){
                     this.guardar();
                     this.loadUser(await this.dataUser(this.user.id)); 
+                    this.activarAlerta('Se ingreso un movimiento correctamente');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
                 }  
 
@@ -291,6 +297,7 @@ import {mapState, mapMutations} from 'vuex'
                 this.updateMovement(this.datos);
                 this.loadUser(await this.dataUser(this.user.id));
                 this.close();
+                this.activarAlerta('Se actualizo movimiento');
 
             },
 
@@ -307,6 +314,7 @@ import {mapState, mapMutations} from 'vuex'
                 this.removeMovement(this.editedItem);
                 this.loadUser(await this.dataUser(this.user.id)); 
                 this.closeDelete();
+                this.activarAlerta('Se elimino movimiento');
 
             },
 
@@ -328,6 +336,13 @@ import {mapState, mapMutations} from 'vuex'
                 this.editedIndex = -1
                 })
 
+            },
+
+            activarAlerta(text){
+
+                this.alerta=true; 
+                this.mensaje=text;
+                setTimeout(() => {this.alerta=false},3000)
             },
 
             ...mapMutations(["loadUser"])
