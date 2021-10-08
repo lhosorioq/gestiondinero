@@ -198,7 +198,6 @@ import {mapState, mapMutations} from 'vuex'
 
                 if (this.$refs.form.validate()){
                     this.guardar();
-                    this.loadUser(await this.dataUser(this.user.id)); 
                     this.activarAlerta('Se ingreso un movimiento correctamente');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
                 }  
@@ -213,7 +212,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                     .put(`http://localhost:3000/registros/update-move/${this.user.id}`, this.movement)
                     .then(response => {
-                    this.message = response.data;
+                    this.loadUser(response.data);
                     this.reset();
                     });
 
@@ -246,7 +245,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                         .put(`http://localhost:3000/registros/delete-move/${this.user.id}`, datos)
                         .then(response => {
-                        this.message = response.data;
+                        this.loadUser(response.data);
                         this.reset();
                         });
 
@@ -264,7 +263,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                         .put(`http://localhost:3000/registros/edit-move/${this.user.id}`, datos)
                         .then(response => {
-                        this.message = response.data;
+                        this.loadUser(response.data);
                         this.reset();
                         });
 
@@ -295,7 +294,6 @@ import {mapState, mapMutations} from 'vuex'
             async save () {
 
                 this.updateMovement(this.datos);
-                this.loadUser(await this.dataUser(this.user.id));
                 this.close();
                 this.activarAlerta('Se actualizo movimiento');
 
@@ -312,7 +310,6 @@ import {mapState, mapMutations} from 'vuex'
             async deleteItemConfirm () {
 
                 this.removeMovement(this.editedItem);
-                this.loadUser(await this.dataUser(this.user.id)); 
                 this.closeDelete();
                 this.activarAlerta('Se elimino movimiento');
 
