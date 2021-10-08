@@ -5,7 +5,7 @@
             <v-col lg=12 >
                 <v-card flat>
                     <v-card-tittle>
-                        <h1 class="text-md-center">MOVIMIENTOS</h1>
+                        <h1 class="text-md-center">Movements</h1>
                     </v-card-tittle>
                 </v-card>
             </v-col>
@@ -22,7 +22,7 @@
                         <v-container pa=4>
                             <!-- Titulo de tabla -->
                             <v-toolbar class="mb-2" color="green darken-5" dark flat>
-                                <v-toolbar-title>Registro de Movimientos</v-toolbar-title>
+                                <v-toolbar-title>Movements Registers</v-toolbar-title>
                             </v-toolbar>
 
                             <v-combobox v-model="movement.category" :rules="rules" :items="category" label="Select a category"></v-combobox>
@@ -49,7 +49,7 @@
                         <v-data-table :headers="headers" :items="this.user.movimientos" sort-by="Categoria" >
                             <template v-slot:top>
                                 <v-toolbar  class="mb-2" color="green darken-5" dark flat>
-                                    <v-toolbar-title>Movimientos Realizados</v-toolbar-title>
+                                    <v-toolbar-title>Done Movements</v-toolbar-title>
                                     
                                     <v-dialog v-model="dialog" max-width="500px">
                                         <v-card>

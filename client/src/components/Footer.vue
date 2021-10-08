@@ -6,7 +6,7 @@
                 <v-card  class="green white--text  ">
                     <v-card-text>
                         <div class="text-center">
-                        <h2>SIGUEMOS EN REDES</h2>
+                        <h2>Follow Us</h2>
                         <v-btn v-for="icon in icons" :key="icon" :href="icon.url"  target="_blank" class="mx-4 white--text" icon>
                         <v-icon size="24px">
                             {{ icon.icon }}
@@ -19,16 +19,13 @@
                             <v-col lg=4>
                             <article >
                                 <p class="text-subtitle-2 text-center text-uppercase" >
-                                    ¿Que hacemos?
+                                    What do we do?
                                 </p>
                                 <p class="text-subtitle-2 text-center" >
-                                Desarrollo de Web
-                                <br>
-                                Tiendas online
-                                <br>
-                                Marketing online
-                                <br>
-                                Web corporativas
+                                    Web Develop<br>
+                                    Online Store<br>
+                                    Online Marketing<br>
+                                    Coporations Web
                                 </p>
 
                             </article>
@@ -44,9 +41,10 @@
                             <v-col lg=4>
                             <article >
                                 <p class="text-subtitle-2 text-center text-uppercase" >
-                                    Informacion
+                                    Information
                                 </p>
                                 <p class="text-subtitle-2 text-center" >
+                                    We are a developers team 
                                     Somos un grupo de desarrolladores que trabajamos <br> codo a codo para que tus proyectos e ideas salgan adelante
                                 </p>
                                 <p class="text-subtitle-2 text-center" >
