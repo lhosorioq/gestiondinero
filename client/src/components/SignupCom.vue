@@ -43,7 +43,7 @@ import axios from "axios";
         ],
         nameRules: [
             v => !!v || 'Name is required',
-            v => (v && v.length <= 20) || 'Name must be less than 10 characters',
+            v => (v && v.length <= 20) || 'Name must be less than 20 characters',
         ],
         emailRules: [
             v => !!v || 'E-mail is required',
