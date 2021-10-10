@@ -9,7 +9,8 @@ const history = require('connect-history-api-fallback');
 
 const app = express(); 
 
-const uri = 'mongodb://localhost:27017/gestiondinero'; 
+// const uri = 'mongodb://localhost:27017/gestiondinero'; 
+const uri = 'mongodb+srv://gestionadmin:G3st10nD1n3r0@gestiondinero.kvajf.mongodb.net/gestiondinero?retryWrites=true&w=majority'
 // useCreateIndex: true esto fue reemplazado por useUnifiedTopology: true ya que esta obsoleto
 const options = {useNewUrlParser: true, useUnifiedTopology: true};
 

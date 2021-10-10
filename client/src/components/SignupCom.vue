@@ -6,7 +6,7 @@
                     <v-container class="d-flex justify-center mb-6">
                         <h1>Sign Up</h1>
                     </v-container>
-                    <v-text-field class="ml-4 mr-4" v-model="usuario.name" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+                    <v-text-field class="ml-4 mr-4" v-model="usuario.name" :counter="20" :rules="nameRules" label="Name" required></v-text-field>
                     <v-text-field class="ml-4 mr-4" v-model="usuario.email" :rules="emailRules" label="E-mail" required></v-text-field>
                     <v-text-field class="ml-4 mr-4" v-model="usuario.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
                     
@@ -27,7 +27,7 @@ import axios from "axios";
 
     export default {
         name:'signup',
-        props:['value'],
+        props: ['value'],
         data: () => ({
         valid: true,
         show4: false,
@@ -43,7 +43,7 @@ import axios from "axios";
         ],
         nameRules: [
             v => !!v || 'Name is required',
-            v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            v => (v && v.length <= 20) || 'Name must be less than 20 characters',
         ],
         emailRules: [
             v => !!v || 'E-mail is required',
@@ -65,9 +65,9 @@ import axios from "axios";
         methods: {
             validate () {
                 if (this.$refs.form.validate()){
-                    alert("Registro Exitoso");
                     this.guardar();
                     this.$emit('input') // Cierra el modal al terminar registro satisfactorio
+                    alert("Registro Exitoso");
                 }  
             },
             guardar(){
