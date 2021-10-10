@@ -4,9 +4,9 @@
         <v-row>
             <v-col lg=12 >
                 <v-card flat>
-                    <v-card-tittle>
-                        <h1 class="text-md-center">MOVIMIENTOS</h1>
-                    </v-card-tittle>
+                    <v-card-title class="justify-center">
+                        <h1 class="text-md-center">MOVEMENTS</h1>
+                    </v-card-title>
                 </v-card>
             </v-col>
         </v-row>
@@ -22,7 +22,7 @@
                         <v-container pa=4>
                             <!-- Titulo de tabla -->
                             <v-toolbar class="mb-2" color="green darken-5" dark flat>
-                                <v-toolbar-title>Registro de Movimientos</v-toolbar-title>
+                                <v-toolbar-title>Record of Movements</v-toolbar-title>
                             </v-toolbar>
 
                             <v-combobox v-model="movement.category" :rules="rules" :items="category" label="Select a category"></v-combobox>
@@ -30,6 +30,11 @@
                                 
                             <v-text-field v-model="movement.value" label="Value (Amount)" :rules="rules" hide-details="auto" type='number'></v-text-field>
                             <v-text-field v-model="movement.observation" label="Observation" :rules="rules" hide-details="auto"></v-text-field>
+
+                            <v-radio-group v-model="movement.radioValue" :rules="rulesRadio" row required> 
+                                <v-radio label="Ingresos" :value=1 ></v-radio>
+                                <v-radio label="Egresos" :value=2></v-radio>
+                            </v-radio-group>
 
                             <v-card-actions>
                                 <v-btn :disabled="!valid" color="success" text @click="validate">
@@ -49,10 +54,11 @@
                         <v-data-table :headers="headers" :items="this.user.movimientos" sort-by="Categoria" >
                             <template v-slot:top>
                                 <v-toolbar  class="mb-2" color="green darken-5" dark flat>
-                                    <v-toolbar-title>Movimientos Realizados</v-toolbar-title>
+                                    <v-toolbar-title>Movements Made</v-toolbar-title>
                                     
                                     <v-dialog v-model="dialog" max-width="500px">
                                         <v-card>
+                                        <v-form ref="form" v-model="validEdit">
                                             <v-card-title>
                                                 <span class="text-h5">Edit Item</span>
                                             </v-card-title>
@@ -72,6 +78,12 @@
                                                     <v-col cols="12" sm="6" md="4">
                                                         <v-text-field v-model="editedItem.observation" label="Observation"></v-text-field>
                                                     </v-col>
+
+                                                    <v-radio-group v-model="editedItem.radioValue" :rules="rulesRadio" row required> 
+                                                        <v-radio label="Ingresos" :value=1 ></v-radio>
+                                                        <v-radio label="Egresos" :value=2></v-radio>
+                                                    </v-radio-group>
+
                                                     
                                                     </v-row>
                                                 </v-container>
@@ -80,21 +92,24 @@
                                             <v-card-actions>
                                                 <v-spacer></v-spacer>
                                                 <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                                                <v-btn color="blue darken-1" text @click="save">Save</v-btn>
+                                                <v-btn color="blue darken-1" text @click="save" :disabled="!validEdit">Save</v-btn>
                                             </v-card-actions>
+                                        </v-form>
                                         </v-card>
                                     </v-dialog>
+
                                     <v-dialog v-model="dialogDelete" max-width="500px">
                                         <v-card>
                                             <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
                                             <v-card-actions>
-                                            <v-spacer></v-spacer>
-                                            <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                                            <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                                            <v-spacer></v-spacer>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                                                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                                                <v-spacer></v-spacer>
                                             </v-card-actions>
                                         </v-card>
                                     </v-dialog>
+
                                 </v-toolbar>
                             </template>
                             <template v-slot:[`item.actions`]="{ item }">
@@ -119,31 +134,33 @@ import {mapState, mapMutations} from 'vuex'
             dialog: false,
             dialogDelete: false,
             alerta: false,
+            valid: true,
+            validEdit: true,
             mensaje: '',
-
             movement: {
                     category:'',
                     concept:'',
                     value: '',
                     observation: '',
+                    radioValue: 1
             },
 
             datos:{index:0, item:{} },
 
             category: [
-                'Transferencia',
+                'Transfer',
                 'PSE',
                 'NEQUI',
-                'Efectivo',
-                'Consignacion',
+                'Cash',
+                'Consignment',
                 'Daviplata'
             ],
             concept: [
-                'Pago de nomina',
-                'Pago servicios',
-                'Diversion',
-                'Alimentacion',
-                'Varios',
+                'Payment of payroll',
+                'Payment of services',
+                'Fun',
+                'Feeding',
+                'Several',
             ],
 
             rules: [
@@ -151,16 +168,20 @@ import {mapState, mapMutations} from 'vuex'
                 value => (value && value.length >= 3) || 'Min 3 characters',
             ],
 
+            rulesRadio: [
+                value => !!value || 'Required.',
+            ],
+
         headers: [
             {
-                    text: 'Categoria',
+                    text: 'Category',
                     align: 'start',
                     sortable: true,
                     value: 'category',
             },
-            { text: 'Concepto', value: 'concept' },
-            { text: 'Valor', value: 'value' },
-            { text: 'Observacion', value: 'observation' },
+            { text: 'Concept', value: 'concept' },
+            { text: 'Value', value: 'value' },
+            { text: 'Observation', value: 'observation' },
             { text: 'Actions', value: 'actions', sortable: false },
         ],
         editedItem: {
@@ -168,6 +189,7 @@ import {mapState, mapMutations} from 'vuex'
             concept: '',
             value: '',
             observation: '',
+            radioValue: 1,
             date: 0,
         },
         defaultItem: {
@@ -175,6 +197,7 @@ import {mapState, mapMutations} from 'vuex'
             concept: '',
             value: '',
             observation: '',
+            radioValue: 1,
             date: 0,
         },
         }),
@@ -197,8 +220,15 @@ import {mapState, mapMutations} from 'vuex'
         async validate () {
 
                 if (this.$refs.form.validate()){
+                    
+                    if (this.movement.radioValue === 2) {
+                        
+                        this.movement.value = '-' + this.movement.value;
+                        
+                    }else if(this.movement.value[0] === '-'){
+                        this.movement.value = this.movement.value.slice(1);
+                    }
                     this.guardar();
-                    this.loadUser(await this.dataUser(this.user.id)); 
                     this.activarAlerta('Se ingreso un movimiento correctamente');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
                 }  
@@ -213,7 +243,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                     .put(`http://localhost:3000/registros/update-move/${this.user.id}`, this.movement)
                     .then(response => {
-                    this.message = response.data;
+                    this.loadUser(response.data);
                     this.reset();
                     });
 
@@ -246,7 +276,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                         .put(`http://localhost:3000/registros/delete-move/${this.user.id}`, datos)
                         .then(response => {
-                        this.message = response.data;
+                        this.loadUser(response.data);
                         this.reset();
                         });
 
@@ -264,7 +294,7 @@ import {mapState, mapMutations} from 'vuex'
                     axios
                         .put(`http://localhost:3000/registros/edit-move/${this.user.id}`, datos)
                         .then(response => {
-                        this.message = response.data;
+                        this.loadUser(response.data);
                         this.reset();
                         });
 
@@ -278,24 +308,33 @@ import {mapState, mapMutations} from 'vuex'
 
             reset () {
 
-                this.$refs.form.reset()
+                this.$refs.form.reset();
+                
+                this.movement.radioValue = 1;
                 
             },
             
             editItem (item) {
 
-                this.editedIndex = this.user.movimientos.indexOf(item)
-                this.editedItem = Object.assign({}, item)
+                this.editedIndex = this.user.movimientos.indexOf(item);
+                this.editedItem = Object.assign({}, item);
+                this.defaultItem = Object.assign({}, item);
                 this.datos.index = this.editedIndex;
                 this.datos.item = this.editedItem;
-                this.dialog = true
+                this.dialog = true;
 
             },
 
             async save () {
-
+                
+                if (this.defaultItem.radioValue === 1 && this.editedItem.radioValue === 2) {
+                    this.datos.item.value = '-' + this.datos.item.value;
+                }else  if (this.defaultItem.radioValue === 2 && this.editedItem.radioValue === 1){ 
+                    this.datos.item.value = this.datos.item.value.slice(1);
+                    
+                }
+                
                 this.updateMovement(this.datos);
-                this.loadUser(await this.dataUser(this.user.id));
                 this.close();
                 this.activarAlerta('Se actualizo movimiento');
 
@@ -303,8 +342,8 @@ import {mapState, mapMutations} from 'vuex'
 
             deleteItem (item) {
 
-                this.editedItem = Object.assign({}, item)
-                this.dialogDelete = true
+                this.editedItem = Object.assign({}, item);
+                this.dialogDelete = true;
                 
 
             },
@@ -312,7 +351,6 @@ import {mapState, mapMutations} from 'vuex'
             async deleteItemConfirm () {
 
                 this.removeMovement(this.editedItem);
-                this.loadUser(await this.dataUser(this.user.id)); 
                 this.closeDelete();
                 this.activarAlerta('Se elimino movimiento');
 
