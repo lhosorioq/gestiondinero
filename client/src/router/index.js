@@ -23,8 +23,15 @@ const routes = [
     path: '/movements',
     name: 'Movements',
     component: () => import('../views/Movimientos.vue')
+  },
+
+  {
+    path: '/info',
+    name: 'Info',
+    component: () => import('../views/Info.vue')
   }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

@@ -2,10 +2,10 @@
     <v-container>
         <v-row>
             <v-col  md="12" lg="6" class="pa-5">
-                <h1 class="font-weight-black font-entangled-bold display-3 pa-5 ">Bienvenido {{user.name}}</h1>
+                <h1 class="font-weight-black font-entangled-bold display-3 pa-5 ">Welcome <br>{{user.name}}</h1>
                 <v-spacer></v-spacer>
-                <h1 class="font-weight-black font-entangled-bold display-3 pa-5">Gestion Dinero</h1>
-                <h1 class="font-weight-black font-entangled-bold font-italic display-1 pa-5">¡Para tener dinero en tus manos, empieza ahora mismo con el control!</h1>
+                <h1 class="font-weight-black font-entangled-bold display-3 pa-5">Budget management</h1>
+                <h1 class="font-weight-black font-entangled-bold font-italic display-1 pa-5">¡If you want to be money in your hands, you have to start now with the control!</h1>
             </v-col>
             <v-col  md="12" lg="6"> 
                 <v-img class="align-end" :src=logo></v-img>

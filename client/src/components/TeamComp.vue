@@ -11,7 +11,7 @@
                         </v-card>
                     </v-col>
                     <v-spacer></v-spacer>
-                    <v-col  v-for="card in cards" :key="card.title" :cols="card.flex" md=6>
+                    <v-col  v-for="card in cards" :key="card.id" :cols="card.flex" md=6>
                     <v-card color="#EDFFCA">
                         <v-row justify="center">
                         <v-col cols="4">

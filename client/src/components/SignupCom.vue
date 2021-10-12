@@ -1,6 +1,6 @@
 <template>
     <v-container class="d-flex justify-center">
-        <v-dialog :value="value" @input="$emit('input')" max-width="32%">
+        <v-dialog :value="value" @input="$emit('input')" max-width="32%" persistent >
             <v-card class="d-flex justify-center" flat width="100%">
                 <v-form class="justify-center mb-6" ref="form" v-model="valid">
                     <v-container class="d-flex justify-center mb-6">
@@ -14,7 +14,7 @@
                     
                     <v-btn :disabled="!valid" color="success" class="ma-4" @click="validate">Validate</v-btn>
                     <v-btn color="warning" class="ma-4" @click="reset">Reset Form</v-btn>
-                    <v-btn color="red" class="ma-4" @click.native="$emit('input')">Close</v-btn>
+                    <v-btn color="red" class="ma-4" @click="this.falseModal">Close</v-btn>
                 </v-form>
             </v-card>
         </v-dialog>    
@@ -24,6 +24,7 @@
 
 <script>
 import axios from "axios";
+import {mapState, mapMutations} from 'vuex'
 
     export default {
         name:'signup',
@@ -39,7 +40,7 @@ import axios from "axios";
         },
         passwordRules: [
             v => !!v || 'Password is required',
-            v => v.length >= 8 || 'Min 8 characters',
+            v => ( v && v.length >=  8 ) || 'Min 8 characters',
         ],
         nameRules: [
             v => !!v || 'Name is required',
@@ -59,7 +60,8 @@ import axios from "axios";
                 set (value) {
                     this.$emit('input', value)
                 }
-            }
+            },
+            ...mapState(['modal']),
         },
 
         methods: {
@@ -84,7 +86,8 @@ import axios from "axios";
             resetValidation () {
                 this.$refs.form.resetValidation()
             },
-
+            ...mapMutations(['falseModal']),
         },
+
     }
 </script>

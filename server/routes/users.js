@@ -186,7 +186,7 @@ router.delete('/registro/:id', async (req, res) =>{
 });
 
 // Actualizar un usuario
-router.put('/registro/:id', async (req, res) => {
+router.put('/update-user/:id', async (req, res) => {
     
     const _id = req.params.id;
     const body = req.body;
