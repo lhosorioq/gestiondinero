@@ -43,21 +43,20 @@
                                 <p class="text-subtitle-2 text-center text-uppercase" >
                                     Information
                                 </p>
-                                <p class="text-subtitle-2 text-center" >
-                                    We are a developers team 
-                                    Somos un grupo de desarrolladores que trabajamos <br> codo a codo para que tus proyectos e ideas salgan adelante
+                                <p class="text-subtitle-2 text-center" style="padding-right: 20px;">
+                                    We are a group of developers who work
+                                    side by side so that your projects and ideas go ahead
                                 </p>
-                                <p class="text-subtitle-2 text-center" >
-                                    El uso de "Gestion de Presupuesto" es con el fin de llevar <br> el control de su dinero, en gastos e ingresos
+                                <p class="text-subtitle-2 text-center" style="padding-right: 20px;">
+                                    The use of "Budget Management" is in order to carry
+                                    control of your money, expenses and income
                                 </p>
-
-                                
                             </article>
                             </v-col>
                         </div>
                         </v-row>
                     <v-card-text class="text-center white--text pt-0">
-                        Proyecto de pagina web para ciclo 3 de MisionTic UTP
+                        Web Page Project for Ciclo 3 - MisionTic UTP
                     </v-card-text>
 
                     <v-divider></v-divider>
