@@ -25,6 +25,7 @@ class User {
 export default new Vuex.Store({
   state: {
     user: new User(), //Se esta usando como ejemplo este nombre se debe quitar al montar BD,
+    modal:true,
   },
   mutations: {
     loadUser(state, data){
@@ -37,6 +38,12 @@ export default new Vuex.Store({
       state.user.valor = data.valor;
       state.user.observacion = data.observacion;
       state.user.movimientos = data.movimientos;
+    },
+    trueModal(state){
+      state.modal = true
+    },
+    falseModal(state){
+      state.modal = false
     }
   },
   actions: {

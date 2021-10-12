@@ -32,8 +32,8 @@
                             <v-text-field v-model="movement.observation" label="Observation" :rules="rules" hide-details="auto"></v-text-field>
 
                             <v-radio-group v-model="movement.radioValue" :rules="rulesRadio" row required> 
-                                <v-radio label="Ingresos" :value=1 ></v-radio>
-                                <v-radio label="Egresos" :value=2></v-radio>
+                                <v-radio label="Income" :value=1 ></v-radio>
+                                <v-radio label="Expenses" :value=2></v-radio>
                             </v-radio-group>
 
                             <v-card-actions>
@@ -80,8 +80,8 @@
                                                     </v-col>
 
                                                     <v-radio-group v-model="editedItem.radioValue" :rules="rulesRadio" row required> 
-                                                        <v-radio label="Ingresos" :value=1 ></v-radio>
-                                                        <v-radio label="Egresos" :value=2></v-radio>
+                                                        <v-radio label="Income" :value=1 ></v-radio>
+                                                        <v-radio label="Expenses" :value=2></v-radio>
                                                     </v-radio-group>
 
                                                     

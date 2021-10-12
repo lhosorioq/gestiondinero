@@ -20,8 +20,8 @@
 
                         <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Login</v-btn>
 
-                        <v-btn color="primary" dark @click="modal=true">Sign Up</v-btn>
-                        <signup-com v-model="modal"/>
+                        <v-btn color="primary" dark @click="this.trueModal">Sign Up</v-btn>
+                        <signup-com v-model="this.modal"/>
                                                 
                 </v-form>
             </div>    
@@ -37,9 +37,7 @@ import {mapState, mapMutations} from 'vuex'
 export default {
     components: { SignupCom },
     name: 'HomeComp',
-    props: {
-        modal: Boolean, 
-    },
+    
     data: () => ({
         valid: true,
         show4: false,
@@ -58,7 +56,7 @@ export default {
 
     }),
     computed:{
-        ...mapState(['user','dialog']),
+        ...mapState(['user','dialog','modal']),
         },
 
     methods: {
@@ -106,8 +104,11 @@ export default {
                 }
 
         },
-        ...mapMutations(["loadUser"])
+        ...mapMutations(["loadUser","trueModal","falseModal"])
     },
+    beforeMount(){
+        this.falseModal();
+    }
 
 }
 </script>

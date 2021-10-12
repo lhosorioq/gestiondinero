@@ -6,8 +6,8 @@
                 <v-card  class="green white--text  ">
                     <v-card-text>
                         <div class="text-center">
-                        <h2>SIGUEMOS EN REDES</h2>
-                        <v-btn v-for="icon in icons" :key="icon" :href="icon.url"  target="_blank" class="mx-4 white--text" icon>
+                        <h2>FOLLOW US IN SOCIAL MEDIA</h2>
+                        <v-btn v-for="icon in icons" :key="icon.id" :href="icon.url"  target="_blank" class="mx-4 white--text" icon>
                         <v-icon size="24px">
                             {{ icon.icon }}
                         </v-icon>
@@ -19,16 +19,16 @@
                             <v-col lg=4>
                             <article >
                                 <p class="text-subtitle-2 text-center text-uppercase" >
-                                    ¿Que hacemos?
+                                    WHAT DO WE DO?
                                 </p>
                                 <p class="text-subtitle-2 text-center" >
-                                Desarrollo de Web
+                                Web development
                                 <br>
-                                Tiendas online
+                                Online store
                                 <br>
-                                Marketing online
+                                Online marketing
                                 <br>
-                                Web corporativas
+                                Corporate websites
                                 </p>
 
                             </article>
@@ -44,13 +44,13 @@
                             <v-col lg=4>
                             <article >
                                 <p class="text-subtitle-2 text-center text-uppercase" >
-                                    Informacion
+                                    INFORMATION
                                 </p>
-                                <p class="text-subtitle-2 text-center" >
-                                    Somos un grupo de desarrolladores que trabajamos <br> codo a codo para que tus proyectos e ideas salgan adelante
+                                <p class="text-subtitle-2 text-center" style="padding-right: 20px" >
+                                    We are a group of developers who work side by side to make <br> your projects and ideas come true
                                 </p>
-                                <p class="text-subtitle-2 text-center" >
-                                    El uso de "Gestion de Presupuesto" es con el fin de llevar <br> el control de su dinero, en gastos e ingresos
+                                <p class="text-subtitle-2 text-center" style="padding-right: 20px" >
+                                    "Budget management" was created so that you can keep track <br> of your income and expenses
                                 </p>
 
                                 
