@@ -4,9 +4,9 @@
         <v-row>
             <v-col lg=12 >
                 <v-card flat>
-                    <v-card-title class="justify-center">
-                        <h1 class="text-md-center">MOVEMENTS</h1>
-                    </v-card-title>
+                    <v-card-tittle>
+                        <h1 class="text-md-center">Movements</h1>
+                    </v-card-tittle>
                 </v-card>
             </v-col>
         </v-row>
@@ -22,7 +22,7 @@
                         <v-container pa=4>
                             <!-- Titulo de tabla -->
                             <v-toolbar class="mb-2" color="green darken-5" dark flat>
-                                <v-toolbar-title>Record of Movements</v-toolbar-title>
+                                <v-toolbar-title>Movements Registers</v-toolbar-title>
                             </v-toolbar>
 
                             <v-combobox v-model="movement.category" :rules="rules" :items="category" label="Select a category"></v-combobox>
@@ -32,8 +32,8 @@
                             <v-text-field v-model="movement.observation" label="Observation" :rules="rules" hide-details="auto"></v-text-field>
 
                             <v-radio-group v-model="movement.radioValue" :rules="rulesRadio" row required> 
-                                <v-radio label="Ingresos" :value=1 ></v-radio>
-                                <v-radio label="Egresos" :value=2></v-radio>
+                                <v-radio label="In" :value=1 ></v-radio>
+                                <v-radio label="Out" :value=2></v-radio>
                             </v-radio-group>
 
                             <v-card-actions>
@@ -54,8 +54,7 @@
                         <v-data-table :headers="headers" :items="this.user.movimientos" sort-by="Categoria" >
                             <template v-slot:top>
                                 <v-toolbar  class="mb-2" color="green darken-5" dark flat>
-                                    <v-toolbar-title>Movements Made</v-toolbar-title>
-                                    
+                                    <v-toolbar-title>Done Movements</v-toolbar-title>
                                     <v-dialog v-model="dialog" max-width="500px">
                                         <v-card>
                                         <v-form ref="form" v-model="validEdit">
@@ -78,7 +77,6 @@
                                                     <v-col cols="12" sm="6" md="4">
                                                         <v-text-field v-model="editedItem.observation" label="Observation"></v-text-field>
                                                     </v-col>
-
                                                     <v-radio-group v-model="editedItem.radioValue" :rules="rulesRadio" row required> 
                                                         <v-radio label="Ingresos" :value=1 ></v-radio>
                                                         <v-radio label="Egresos" :value=2></v-radio>

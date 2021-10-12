@@ -1,9 +1,7 @@
 <template>
     <v-container>
         <barra-navegacion/>
-
         <movimientos-comp/>
-
         <Footer/>
     </v-container>
 </template>
