@@ -229,7 +229,7 @@ import {mapState, mapMutations} from 'vuex'
                         this.movement.value = this.movement.value.slice(1);
                     }
                     this.guardar();
-                    this.activarAlerta('Se ingreso un movimiento correctamente');
+                    this.activarAlerta('Movement entered correctly');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
                 }  
 
@@ -336,7 +336,7 @@ import {mapState, mapMutations} from 'vuex'
                 
                 this.updateMovement(this.datos);
                 this.close();
-                this.activarAlerta('Se actualizo movimiento');
+                this.activarAlerta('Updated movement');
 
             },
 
@@ -352,7 +352,7 @@ import {mapState, mapMutations} from 'vuex'
 
                 this.removeMovement(this.editedItem);
                 this.closeDelete();
-                this.activarAlerta('Se elimino movimiento');
+                this.activarAlerta('Movement removed');
 
             },
 
