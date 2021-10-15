@@ -142,7 +142,8 @@ import {mapState, mapMutations} from 'vuex'
                     concept:'',
                     value: '',
                     observation: '',
-                    radioValue: 1
+                    radioValue: 1,
+                    fecha: '',
             },
 
             datos:{index:0, item:{} },
@@ -182,6 +183,7 @@ import {mapState, mapMutations} from 'vuex'
             { text: 'Concept', value: 'concept' },
             { text: 'Value', value: 'value' },
             { text: 'Observation', value: 'observation' },
+            { text: 'Date', value: 'fecha' },
             { text: 'Actions', value: 'actions', sortable: false },
         ],
         editedItem: {
@@ -228,6 +230,7 @@ import {mapState, mapMutations} from 'vuex'
                     }else if(this.movement.value[0] === '-'){
                         this.movement.value = this.movement.value.slice(1);
                     }
+                    this.movement.fecha = this.crearFecha();
                     this.guardar();
                     this.activarAlerta('Movement entered correctly');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
@@ -381,6 +384,11 @@ import {mapState, mapMutations} from 'vuex'
                 this.alerta=true; 
                 this.mensaje=text;
                 setTimeout(() => {this.alerta=false},3000)
+            },
+
+            crearFecha(){
+                let date = new Date();
+                return date.toLocaleString()
             },
 
             ...mapMutations(["loadUser"])
