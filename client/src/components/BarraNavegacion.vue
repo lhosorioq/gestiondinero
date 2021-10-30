@@ -4,7 +4,7 @@
             <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
             <v-toolbar-title class="title font-weight-light">BUDGET MANAGEMENT</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-img lazy-src='/client/src/assets/JorgeL.jpg' max-height= "45px" max-width= "45px" src='/client/src/assets/JorgeL.jpg' justify-content="center"></v-img>
+            <!-- <v-img lazy-src='/client/src/assets/JorgeL.jpg' max-height= "45px" max-width= "45px" src='/client/src/assets/JorgeL.jpg' justify-content="center"></v-img> -->
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" absolute temporary color="green" dark>
             <v-list nav dense>

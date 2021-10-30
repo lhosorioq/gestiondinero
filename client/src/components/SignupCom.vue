@@ -6,7 +6,7 @@
                     <v-container class="d-flex justify-center mb-6">
                         <h1>Sign Up</h1>
                     </v-container>
-                    <v-text-field class="ml-4 mr-4" v-model="usuario.name" :counter="20" :rules="nameRules" label="Name" required></v-text-field>
+                    <v-text-field class="ml-4 mr-4" v-model="usuario.username" :counter="20" :rules="nameRules" label="Name" required></v-text-field>
                     <v-text-field class="ml-4 mr-4" v-model="usuario.email" :rules="emailRules" label="E-mail" required></v-text-field>
                     <v-text-field class="ml-4 mr-4" v-model="usuario.password" :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'" :rules="passwordRules" :type="show4 ? 'text' : 'password'" name="input-10-2" label="Password" hint="At least 8 characters" @click:append="show4 = !show4"></v-text-field>
                     
@@ -33,10 +33,25 @@ import {mapState, mapMutations} from 'vuex'
         valid: true,
         show4: false,
         usuario: {
-            name:'',
+            username:'',
             pasword: '',
             email: '',
             egree: '',
+            category: [
+                'Transfer',
+                'PSE',
+                'NEQUI',
+                'Cash',
+                'Consignment',
+                'Daviplata'
+            ],
+            concepts: [
+                'Payment of payroll',
+                'Payment of services',
+                'Fun',
+                'Feeding',
+                'Several',
+            ],
         },
         passwordRules: [
             v => !!v || 'Password is required',
