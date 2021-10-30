@@ -25,8 +25,34 @@
                                 <v-toolbar-title>Record of Movements</v-toolbar-title>
                             </v-toolbar>
 
-                            <v-combobox v-model="movement.category" :rules="rules" :items="category" label="Select a category"></v-combobox>
-                            <v-combobox v-model="movement.concept" :rules="rules" :items="concept" label="Select a concept"></v-combobox>
+                            <v-combobox v-model="movement.category" :rules="rules" :items="user.category" label="Select a category">
+                                <template v-slot:item="{ item }">
+                                        {{ item }}                                    
+                                    <v-spacer></v-spacer>
+                                    <v-list-item-action @click.stop>
+                                        <v-btn
+                                        icon
+                                        @click.stop.prevent="editCategory(item)"
+                                        >
+                                        <v-icon>{{ 'mdi-delete' }}</v-icon>
+                                        </v-btn>
+                                    </v-list-item-action>
+                                </template>
+                            </v-combobox>
+                            <v-combobox v-model="movement.concept" :rules="rules" :items="user.concepts" label="Select a concept">
+                                <template v-slot:item="{ item }">
+                                        {{ item }}                                    
+                                    <v-spacer></v-spacer>
+                                    <v-list-item-action @click.stop>
+                                        <v-btn
+                                        icon
+                                        @click.stop.prevent="editConcept(item)"
+                                        >
+                                        <v-icon>{{ 'mdi-delete' }}</v-icon>
+                                        </v-btn>
+                                    </v-list-item-action>
+                                </template>
+                            </v-combobox>
                                 
                             <v-text-field v-model="movement.value" label="Value (Amount)" :rules="rules" hide-details="auto" type='number'></v-text-field>
                             <v-text-field v-model="movement.observation" label="Observation" :rules="rules" hide-details="auto"></v-text-field>
@@ -67,10 +93,10 @@
                                                 <v-container>
                                                     <v-row>
                                                     <v-col cols="12" sm="6" md="4">
-                                                        <v-combobox v-model="editedItem.category" :rules="rules" :items="category" label="Select a category"></v-combobox>
+                                                        <v-combobox v-model="editedItem.category" :rules="rules" :items="user.category" label="Select a category"></v-combobox>
                                                     </v-col>
                                                     <v-col cols="12" sm="6" md="4">
-                                                        <v-combobox v-model="editedItem.concept" :rules="rules" :items="concept" label="Select a concept"></v-combobox>
+                                                        <v-combobox v-model="editedItem.concept" :rules="rules" :items="user.concepts" label="Select a concept"></v-combobox>
                                                     </v-col>
                                                     <v-col cols="12" sm="6" md="4">
                                                         <v-text-field v-model="editedItem.value" label="Value (Amount)" :rules="rules" hide-details="auto" type='number'></v-text-field>
@@ -231,6 +257,17 @@ import {mapState, mapMutations} from 'vuex'
                         this.movement.value = this.movement.value.slice(1);
                     }
                     this.movement.fecha = this.crearFecha();
+                    this.loadMovements(this.movement);
+                    const prue = this.user.category.find(cat => cat === this.movement.category);
+                    
+                    if(!prue){
+                        this.loadCategory(this.movement.category);
+                    }
+                    const prue2 = this.user.concepts.find(cat => cat === this.movement.concept);
+                    if(!prue2){
+                        this.loadConcept(this.movement.concept);
+                    }
+
                     this.guardar();
                     this.activarAlerta('Movement entered correctly');
                     // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.user));
@@ -240,15 +277,17 @@ import {mapState, mapMutations} from 'vuex'
             
             guardar(){
                     
-
                 try {
                     
                     axios
-                    .put(`http://localhost:3000/registros/update-move/${this.user.id}`, this.movement)
+                    .put(`http://localhost:3000/registros/update-usermove/${this.user.id}`, this.user)
                     .then(response => {
                     this.loadUser(response.data);
                     this.reset();
-                    });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        });
 
                 } catch (error) {
                     
@@ -391,7 +430,17 @@ import {mapState, mapMutations} from 'vuex'
                 return date.toLocaleString()
             },
 
-            ...mapMutations(["loadUser"])
+            editCategory(item){
+                this.deleteCategory(item)
+                this.guardar();
+            },
+
+            editConcept(item){
+                this.deleteConcept(item)
+                this.guardar();
+            },
+
+            ...mapMutations(["loadUser", "loadMovements", "loadCategory", "loadConcept", "deleteCategory", "deleteConcept"])
 
         },
     }

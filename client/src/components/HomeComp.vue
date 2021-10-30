@@ -62,10 +62,9 @@ export default {
     methods: {
         async validate () {
         if (this.$refs.form.validate()){
-            let respuesta = await this.login(this.usuario.email, this.usuario.password);
-            
-            if (respuesta!='') {
-                this.loadUser(await this.dataUser(respuesta));
+            const respuesta = await this.login(this.usuario.email, this.usuario.password);
+            if (respuesta.auth) {
+                this.loadUser(respuesta.user);
                 this.reset();
                 window.location.href = '/main'
             }else{
@@ -78,18 +77,19 @@ export default {
         reset () {
             this.$refs.form.reset()
         },
-            async login (email, password) {
-                try {
-                    const response = await axios({
-                        method: 'get',
-                        params: { email: email, password: password},
-                        url: `http://localhost:3000/registros/login`,
-                        responseType: 'json'
-                    });
-                    return response.data;
-                } catch (error) {
-                    console.log(error);
-                }
+        async login (email, password) {
+            try {
+                const response = await axios({
+                    method: 'post',
+                    data: { email: email, password: password},
+                    url: `http://localhost:3000/registros/login`,
+                    responseType: 'json'
+                });
+                return response.data;
+                
+            } catch (error) {
+                console.log(error);
+            }
         },
             async dataUser (id) {
                 try {
