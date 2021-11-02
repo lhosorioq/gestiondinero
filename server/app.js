@@ -20,7 +20,6 @@ app.use(express.json());
 //application/x-www-form-urlencoded 
 app.use(express.urlencoded({ extended: true }))
 
-
 app.use(history()); 
 // Carpeta donde se enviaran todos los datos a HTML VUE
 app.use(express.static(path.join(__dirname, 'public')));

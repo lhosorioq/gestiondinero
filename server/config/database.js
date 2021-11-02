@@ -7,5 +7,5 @@ const options = {useNewUrlParser: true, useUnifiedTopology: true};
 // Conectar DB gestiondinero
 (async () => {
     const db = await mongoose.connect(uri, options);
-    console.log('Conectado a DB gestiondinero', db.connection.name);
+    console.log('Conectado a DB ', db.connection.name);
 })();
